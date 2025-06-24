@@ -1,0 +1,29 @@
+.club-carousel {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.club-carousel-image {
+  height: 400px;
+  object-fit: cover;
+}
+
+.reply-card {
+  background-color: #f8f9fa;
+  border-left: 3px solid #dee2e6;
+}
+
+.badge {
+  font-weight: normal;
+}
+
+.tab-content {
+  padding-top: 1.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .club-carousel-image {
+    height: 250px;
+  }
+} 

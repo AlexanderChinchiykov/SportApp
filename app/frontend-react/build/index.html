@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Sports and Martial Arts Community" />
+    <title>Sports and Martial Arts Community</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+      }
+      .card {
+        background-color: white;
+        border-radius: 5px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .nav a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        background-color: #4CAF50;
+      }
+      .nav a:hover {
+        background-color: #45a049;
+      }
+      .form-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .form-card {
+        flex: 1;
+        background-color: white;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 4px;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .error-message {
+        color: red;
+        margin-top: 10px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Sports and Martial Arts Community</h1>
+      <div class="nav">
+        <a href="/docs">API Documentation</a>
+        <a href="#login" onclick="showLoginForm()">Login</a>
+        <a href="#register" onclick="showRegisterForm()">Register</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>Welcome to our community!</h2>
+        <p>This is a placeholder for the React application. The full React build is coming soon!</p>
+        <p>In the meantime, you can use the simplified login and registration forms below.</p>
+      </div>
+
+      <div class="form-container">
+        <div id="login-form" class="form-card">
+          <h2>Login</h2>
+          <form id="login">
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" required>
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div id="login-error" class="error-message"></div>
+          </form>
+        </div>
+
+        <div id="register-form" class="form-card">
+          <h2>Register</h2>
+          <form id="register">
+            <div class="form-group">
+              <label for="register-email">Email</label>
+              <input type="email" id="register-email" required>
+            </div>
+            <div class="form-group">
+              <label for="register-username">Username</label>
+              <input type="text" id="register-username" required>
+            </div>
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <input type="password" id="register-password" required>
+            </div>
+            <div class="form-group">
+              <label for="register-first-name">First Name</label>
+              <input type="text" id="register-first-name" required>
+            </div>
+            <div class="form-group">
+              <label for="register-last-name">Last Name</label>
+              <input type="text" id="register-last-name" required>
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <div style="display: flex; gap: 10px;">
+                <label style="display: flex; align-items: center; font-weight: normal;">
+                  <input type="radio" name="role" value="student" checked style="width: auto; margin-right: 5px;"> 
+                  Student
+                </label>
+                <label style="display: flex; align-items: center; font-weight: normal;">
+                  <input type="radio" name="role" value="coach" style="width: auto; margin-right: 5px;"> 
+                  Coach
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label style="display: flex; align-items: center; font-weight: normal;">
+                <input type="checkbox" id="is-club-owner" style="width: auto; margin-right: 5px;">
+                I am a club owner
+              </label>
+            </div>
+            <button type="submit">Register</button>
+            <div id="register-error" class="error-message"></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Features</h2>
+        <ul>
+          <li>User registration and authentication with different roles (student, coach, club owner)</li>
+          <li>Club management with detailed profiles and image uploads</li>
+          <li>Reviews and comments on club pages</li>
+          <li>Dashboard for club owners</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('login').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const errorDiv = document.getElementById('login-error');
+        errorDiv.style.display = 'none';
+        
+        const loginData = {
+          email: document.getElementById('login-email').value,
+          password: document.getElementById('login-password').value
+        };
+        
+        try {
+          const response = await fetch('/api/v1/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            // Store user data in localStorage
+            localStorage.setItem('userId', data.user.id);
+            alert('Login successful! Redirecting to dashboard...');
+            // Redirect to dashboard
+            window.location.href = '/dashboard';
+          } else {
+            const error = await response.json();
+            errorDiv.textContent = error.detail || 'Login failed';
+            errorDiv.style.display = 'block';
+          }
+        } catch (err) {
+          errorDiv.textContent = 'An error occurred. Please try again.';
+          errorDiv.style.display = 'block';
+          console.error('Login error:', err);
+        }
+      });
+
+      document.getElementById('register').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const errorDiv = document.getElementById('register-error');
+        errorDiv.style.display = 'none';
+        
+        // Get role and club owner status
+        const isClubOwner = document.getElementById('is-club-owner').checked;
+        let roleValue = document.querySelector('input[name="role"]:checked').value;
+        
+        if (isClubOwner) {
+          roleValue = 'club_owner';
+        }
+        
+        const registerData = {
+          email: document.getElementById('register-email').value,
+          username: document.getElementById('register-username').value,
+          password: document.getElementById('register-password').value,
+          first_name: document.getElementById('register-first-name').value,
+          last_name: document.getElementById('register-last-name').value,
+          role: roleValue,
+          is_club_owner: isClubOwner
+        };
+        
+        try {
+          const response = await fetch('/api/v1/auth/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(registerData)
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            // Store user data in localStorage
+            localStorage.setItem('userId', data.user.id);
+            alert('Registration successful! Redirecting...');
+            
+            // Redirect based on user type
+            if (isClubOwner) {
+              window.location.href = '/create-club';
+            } else {
+              window.location.href = '/dashboard';
+            }
+          } else {
+            const error = await response.json();
+            errorDiv.textContent = typeof error.detail === 'string' 
+              ? error.detail 
+              : JSON.stringify(error.detail);
+            errorDiv.style.display = 'block';
+          }
+        } catch (err) {
+          errorDiv.textContent = 'An error occurred. Please try again.';
+          errorDiv.style.display = 'block';
+          console.error('Registration error:', err);
+        }
+      });
+      
+      // Role and club owner logic
+      document.getElementById('is-club-owner').addEventListener('change', function() {
+        const roleInputs = document.querySelectorAll('input[name="role"]');
+        if (this.checked) {
+          roleInputs.forEach(input => {
+            input.disabled = true;
+          });
+        } else {
+          roleInputs.forEach(input => {
+            input.disabled = false;
+          });
+        }
+      });
+      
+      // Display functions for toggling between forms
+      function showLoginForm() {
+        document.getElementById('login-form').style.display = 'block';
+        document.getElementById('register-form').style.display = 'none';
+      }
+      
+      function showRegisterForm() {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('register-form').style.display = 'block';
+      }
+      
+      // Show login form by default
+      showLoginForm();
+    </script>
+  </body>
+</html> 

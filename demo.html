@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Community Platform</title>
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #121212;
+            color: #e1e1e1;
+        }
+
+        /* Layout */
+        .wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: #1e1e1e;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #3a86ff;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: #e1e1e1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #3a86ff;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #aaa;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #3a86ff;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #3a86ff;
+            border: 1px solid #3a86ff;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(58, 134, 255, 0.1);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin: 0 0 0.75rem;
+            color: white;
+        }
+
+        .card-text {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background-color: #2a2a2a;
+            color: #ddd;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        /* Form */
+        .form-card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-card h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ddd;
+        }
+
+        .input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 5px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #3a86ff;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #aaa;
+        }
+
+        .form-footer a {
+            color: #3a86ff;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: #aaa;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tab:target {
+            display: block;
+        }
+
+        .tab:not(:target) {
+            display: none;
+        }
+
+        /* Default tab to show */
+        #home:not(:target) {
+            display: block;
+        }
+
+        .tab-link {
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+            background-color: #2a2a2a;
+            color: #ddd;
+        }
+
+        .tab-link.active {
+            background-color: #3a86ff;
+            color: white;
+        }
+
+        .login-section .form-card,
+        .register-section .form-card {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <a href="#home" class="logo">Sports<span>Community</span></a>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#login">Login</a>
+                <a href="#register">Register</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <a href="#home" class="tab-link" id="home-tab">Home</a>
+                <a href="#login" class="tab-link" id="login-tab">Login</a>
+                <a href="#register" class="tab-link" id="register-tab">Register</a>
+            </div>
+
+            <!-- Home Tab -->
+            <div id="home" class="tab">
+                <section class="hero">
+                    <h1>Find Your Perfect <span style="color: #3a86ff;">Sports Club</span></h1>
+                    <p>Discover the best sports and martial arts clubs all in one place</p>
+                    <div class="hero-buttons">
+                        <a href="#login" class="btn btn-primary">Sign In</a>
+                        <a href="#register" class="btn btn-outline">Register</a>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Featured Clubs</h2>
+                    <div class="card-grid">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/400x300/1e1e1e/3a86ff?text=Club" alt="Martial Arts Academy" class="card-image">
+                            <div class="card-content">
+                                <h3 class="card-title">Martial Arts Academy</h3>
+                                <p class="card-text">A premium martial arts training center offering various disciplines including Karate, Judo, and Brazilian Jiu-Jitsu.</p>
+                                <div class="tag-list">
+                                    <span class="tag">Karate</span>
+                                    <span class="tag">Judo</span>
+                                    <span class="tag">BJJ</span>
+                                </div>
+                                <a href="#" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://via.placeholder.com/400x300/1e1e1e/3a86ff?text=Club" alt="Advanced Boxing Club" class="card-image">
+                            <div class="card-content">
+                                <h3 class="card-title">Advanced Boxing Club</h3>
+                                <p class="card-text">Professional boxing training for all ages and skill levels.</p>
+                                <div class="tag-list">
+                                    <span class="tag">Boxing</span>
+                                    <span class="tag">Conditioning</span>
+                                </div>
+                                <a href="#" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://via.placeholder.com/400x300/1e1e1e/3a86ff?text=Club" alt="Elite MMA Center" class="card-image">
+                            <div class="card-content">
+                                <h3 class="card-title">Elite MMA Center</h3>
+                                <p class="card-text">Top-notch MMA training facility with professional coaches and modern equipment.</p>
+                                <div class="tag-list">
+                                    <span class="tag">MMA</span>
+                                    <span class="tag">Wrestling</span>
+                                    <span class="tag">Boxing</span>
+                                </div>
+                                <a href="#" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Login Tab -->
+            <div id="login" class="tab login-section">
+                <div class="form-card">
+                    <h2>Sign in to your account</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" class="input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="input" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign in</button>
+                    </form>
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="#register">Sign up now</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register Tab -->
+            <div id="register" class="tab register-section">
+                <div class="form-card">
+                    <h2>Create your account</h2>
+                    <form>
+                        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label for="first_name">First Name</label>
+                                <input type="text" id="first_name" class="input" required>
+                            </div>
+                            <div>
+                                <label for="last_name">Last Name</label>
+                                <input type="text" id="last_name" class="input" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" class="input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg_email">Email address</label>
+                            <input type="email" id="reg_email" class="input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg_password">Password</label>
+                            <input type="password" id="reg_password" class="input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input type="password" id="confirm_password" class="input" required>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: center;">
+                            <input type="checkbox" id="is_club_owner" style="margin-right: 10px;">
+                            <label for="is_club_owner" style="margin-bottom: 0;">Register as a club owner</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create account</button>
+                    </form>
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#login">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2023 Sports Community. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple tab switcher
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-link');
+            const updateActiveTab = () => {
+                const hash = window.location.hash || '#home';
+                tabs.forEach(tab => {
+                    const href = tab.getAttribute('href');
+                    if (href === hash) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+            };
+
+            // Initialize
+            updateActiveTab();
+
+            // Update on hash change
+            window.addEventListener('hashchange', updateActiveTab);
+        });
+    </script>
+</body>
+</html> 

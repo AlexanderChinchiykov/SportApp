@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Debug Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4285f4;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OAuth Debug Information</h1>
+        <p>This page displays information about the current URL and OAuth parameters:</p>
+        
+        <h2>Current URL:</h2>
+        <pre id="current-url"></pre>
+        
+        <h2>URL Parameters:</h2>
+        <pre id="url-params"></pre>
+        
+        <h2>OAuth Code:</h2>
+        <pre id="oauth-code">No code found</pre>
+        
+        <div id="actions">
+            <a href="/" class="button">Go to Home</a>
+            <a href="/login" class="button">Go to Login</a>
+            <button id="continue-auth" class="button">Continue Authentication</button>
+        </div>
+    </div>
+    
+    <script>
+        // Display current URL
+        document.getElementById('current-url').textContent = window.location.href;
+        
+        // Parse and display URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramsObj = {};
+        for (const [key, value] of urlParams.entries()) {
+            paramsObj[key] = value;
+        }
+        document.getElementById('url-params').textContent = JSON.stringify(paramsObj, null, 2);
+        
+        // Extract and display OAuth code
+        const code = urlParams.get('code');
+        if (code) {
+            document.getElementById('oauth-code').textContent = `${code.substring(0, 10)}...${code.substring(code.length - 10)}`;
+            
+            // Setup continue button
+            document.getElementById('continue-auth').addEventListener('click', function() {
+                window.location.href = `/api/v1/auth/google/callback?code=${encodeURIComponent(code)}`;
+            });
+        } else {
+            document.getElementById('continue-auth').style.display = 'none';
+        }
+        
+        // Log to console for debugging
+        console.log('Debug page loaded');
+        console.log('Current URL:', window.location.href);
+        console.log('URL Params:', paramsObj);
+        console.log('OAuth Code Present:', !!code);
+    </script>
+</body>
+</html> 

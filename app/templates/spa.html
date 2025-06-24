@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports and Martial Arts Community</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        /* Buttons */
+        button, .button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover, .button:hover {
+            background-color: #2980b9;
+        }
+        
+        button:disabled, .button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        /* Club List */
+        .club-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .club-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .club-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .club-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .club-card-content {
+            padding: 1.5rem;
+        }
+        
+        /* Club Details */
+        .club-details .main-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .club-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .club-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+        
+        /* Dashboard Elements */
+        .dashboard-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Utility Classes */
+        .error-message {
+            color: #e74c3c;
+            background-color: #fadbd8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .success-message {
+            color: #27ae60;
+            background-color: #d5f5e3;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Pages */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="app-title">Sports and Martial Arts Community</div>
+        <nav class="nav-links">
+            <a href="/" class="nav-link" data-page="home">Home</a>
+            <a href="/clubs" class="nav-link" data-page="clubs">Clubs</a>
+            <a href="/login" class="nav-link auth-link" data-page="login">Login</a>
+            <a href="/register" class="nav-link auth-link" data-page="register">Register</a>
+            <a href="/dashboard" class="nav-link logged-in-link hidden" data-page="dashboard">Dashboard</a>
+            <a href="/create-club" class="nav-link logged-in-link hidden" data-page="create-club">Create Club</a>
+            <a href="#" class="nav-link logged-in-link hidden" id="logout-link">Logout</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <div class="card">
+                <h1>Welcome to Sports and Martial Arts Community!</h1>
+                <p>Find and join the best sports clubs in your area.</p>
+                <div id="featured-clubs" class="club-list">
+                    <div class="loading">Loading featured clubs...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page">
+            <div class="card">
+                <h1>Login to Your Account</h1>
+                <div id="login-error" class="error-message hidden"></div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" id="login-button">Login</button>
+                </form>
+                
+                <p style="margin-top: 1rem;">Don't have an account? <a href="/register" class="nav-link" data-page="register">Register here</a></p>
+            </div>
+        </div>
+
+        <!-- Register Page -->
+        <div id="register-page" class="page">
+            <div class="card">
+                <h1>Create an Account</h1>
+                <div id="register-error" class="error-message hidden"></div>
+                
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-username">Username</label>
+                        <input type="text" id="register-username" name="username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" minlength="8" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-first-name">First Name</label>
+                        <input type="text" id="register-first-name" name="first_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-last-name">Last Name</label>
+                        <input type="text" id="register-last-name" name="last_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Role</label>
+                        <div style="display: flex; gap: 1rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="radio" name="role" value="student" checked> 
+                                Student
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="radio" name="role" value="coach"> 
+                                Coach
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                            <input type="checkbox" id="register-club-owner" name="is_club_owner">
+                            I am a club owner
+                        </label>
+                    </div>
+                    
+                    <button type="submit" id="register-button">Register</button>
+                </form>
+                
+                <p style="margin-top: 1rem;">Already have an account? <a href="/login" class="nav-link" data-page="login">Login here</a></p>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page">
+            <div class="card">
+                <h1>My Dashboard</h1>
+                <div id="dashboard-loading" class="loading">Loading your dashboard...</div>
+                <div id="dashboard-error" class="error-message hidden"></div>
+                
+                <div id="no-club-message" class="hidden">
+                    <p>You don't have any clubs yet. Would you like to create one?</p>
+                    <a href="/create-club" class="button nav-link" data-page="create-club">Create Club</a>
+                </div>
+                
+                <div id="club-dashboard" class="hidden">
+                    <h2 id="club-name"></h2>
+                    <div class="club-grid">
+                        <div>
+                            <img id="club-image" src="https://via.placeholder.com/400x300?text=No+Image" alt="Club image">
+                        </div>
+                        <div>
+                            <p id="club-location"><strong>Location:</strong> <span></span></p>
+                            <p id="club-address" class="hidden"><strong>Address:</strong> <span></span></p>
+                            <p id="club-telephone"><strong>Telephone:</strong> <span></span></p>
+                            <p id="club-price"><strong>Hourly Price:</strong> $<span></span></p>
+                            <p id="club-website" class="hidden"><strong>Website:</strong> <a href="#" target="_blank"></a></p>
+                            <p id="club-description" class="hidden"><strong>Description:</strong> <span></span></p>
+                            
+                            <div class="dashboard-actions">
+                                <button id="edit-club-button">Edit Club</button>
+                                <button id="manage-pictures-button">Manage Pictures</button>
+                                <button id="view-public-button">View Public Page</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Club Page -->
+        <div id="create-club-page" class="page">
+            <div class="card">
+                <h1>Create Your Club</h1>
+                <div id="create-club-error" class="error-message hidden"></div>
+                
+                <form id="create-club-form">
+                    <div class="form-group">
+                        <label for="club-name">Club Name</label>
+                        <input type="text" id="club-name-input" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="club-town">Town</label>
+                        <input type="text" id="club-town" name="town" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="club-telephone">Telephone Number</label>
+                        <input type="tel" id="club-telephone-input" name="telephone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="club-hourly-price">Hourly Price</label>
+                        <input type="number" id="club-hourly-price" name="hourly_price" min="0" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="club-description-input">Description</label>
+                        <textarea id="club-description-input" name="description" placeholder="Describe your club"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="club-address-input">Address</label>
+                        <input type="text" id="club-address-input" name="address" placeholder="Street address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="club-website-input">Website</label>
+                        <input type="url" id="club-website-input" name="website" placeholder="https://example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="club-social-media">Social Media</label>
+                        <input type="text" id="club-social-media" name="social_media" placeholder="@your_handle">
+                    </div>
+                    
+                    <button type="submit" id="create-club-button">Create Club</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Clubs List Page -->
+        <div id="clubs-page" class="page">
+            <div class="card">
+                <h1>Browse Clubs</h1>
+                <div id="clubs-loading" class="loading">Loading clubs...</div>
+                <div id="clubs-error" class="error-message hidden"></div>
+                
+                <div id="clubs-list" class="club-list">
+                    <!-- Clubs will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Club Details Page -->
+        <div id="club-details-page" class="page">
+            <div class="card">
+                <div id="club-details-loading" class="loading">Loading club details...</div>
+                <div id="club-details-error" class="error-message hidden"></div>
+                
+                <div id="club-details-content" class="hidden">
+                    <h1 id="detail-club-name"></h1>
+                    
+                    <div class="club-gallery">
+                        <img id="detail-club-image" src="https://via.placeholder.com/800x400?text=No+Images" alt="Club image" class="main-image">
+                        
+                        <div class="gallery-controls hidden">
+                            <button id="prev-image">&lt;</button>
+                            <div id="image-counter">1 / 1</div>
+                            <button id="next-image">&gt;</button>
+                        </div>
+                    </div>
+                    
+                    <div class="club-info">
+                        <div class="info-section">
+                            <h2>Club Information</h2>
+                            <p id="detail-club-location"><strong>Location:</strong> <span></span></p>
+                            <p id="detail-club-address" class="hidden"><strong>Address:</strong> <span></span></p>
+                            <p id="detail-club-telephone"><strong>Telephone:</strong> <span></span></p>
+                            <p id="detail-club-price"><strong>Hourly Price:</strong> $<span></span></p>
+                            <p id="detail-club-website" class="hidden"><strong>Website:</strong> <a href="#" target="_blank"></a></p>
+                            <p id="detail-club-social" class="hidden"><strong>Social Media:</strong> <span></span></p>
+                            <p id="detail-club-owner" class="hidden"><strong>Owner:</strong> <span></span></p>
+                        </div>
+                        
+                        <div id="detail-club-description-section" class="info-section hidden">
+                            <h2>Description</h2>
+                            <p id="detail-club-description"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Reviews</h2>
+                <div id="reviews-section">
+                    <p>Reviews feature coming soon!</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Comments</h2>
+                <div id="comments-section">
+                    <p>Comments feature coming soon!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        {{ spa_js|safe }}
+    </script>
+</body>
+</html> 
